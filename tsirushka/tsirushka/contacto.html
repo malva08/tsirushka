@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-page-title="Contacto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script type="module" src="./js/head-loader.js"></script>
+</head>
+<body>
+  <div data-component="navbar"></div>
+
+  <!-- HERO -->
+  <header class="hero-contact">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1 class="display-4 fw-bold text-white mb-3">Contáctanos</h1>
+      <p class="lead text-white">Estamos aquí para ayudarte</p>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <div class="row g-5">
+      
+      <!-- FORMULARIO -->
+      <div class="col-lg-7">
+        <div class="card border-0 shadow-lg">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="h4 fw-bold mb-4">Envíanos un mensaje</h2>
+            <p class="text-muted mb-4">
+              Déjanos tu consulta o solicitud y te responderemos a la brevedad.
+            </p>
+
+            <form id="formContacto" class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Nombre completo *</label>
+                <input id="nombre" class="form-control form-control-lg" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email *</label>
+                <input id="email" type="email" class="form-control form-control-lg" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Teléfono</label>
+                <input id="telefono" class="form-control form-control-lg" placeholder="Opcional">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Asunto *</label>
+                <select id="asunto" class="form-select form-select-lg" required>
+                  <option value="">Selecciona...</option>
+                  <option value="Consulta general">Consulta general</option>
+                  <option value="Taller de chocolate">Taller de chocolate</option>
+                  <option value="Visita a la finca">Visita a la finca</option>
+                  <option value="Consulta de envío">Consulta de envío</option>
+                  <option value="Evento especial">Evento especial</option>
+                  <option value="Pedido mayorista">Pedido mayorista</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Mensaje *</label>
+                <textarea id="mensaje" class="form-control form-control-lg" rows="6" required 
+                          placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+              </div>
+              <div class="col-12">
+                <div class="form-text mb-3">
+                  <i class="bi bi-info-circle me-1"></i>
+                  Los campos marcados con * son obligatorios
+                </div>
+                <div class="d-grid d-md-flex gap-2">
+                  <button class="btn btn-primary btn-lg">
+                    <i class="bi bi-send"></i> Enviar mensaje
+                  </button>
+                  <a class="btn btn-outline-secondary btn-lg" href="index.html">
+                    Cancelar
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFORMACIÓN DE CONTACTO -->
+      <div class="col-lg-5">
+        
+        <!-- Datos -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-4">
+              <i class="bi bi-info-circle-fill text-primary me-2"></i>
+              Información de contacto
+            </h3>
+            
+            <div class="mb-4">
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-telephone-fill text-primary fs-4 me-3"></i>
+                <div>
+                  <h4 class="h6 fw-semibold mb-1">Teléfonos</h4>
+                  <p class="mb-1">
+                    <a href="tel:+50686304400" class="text-decoration-none">
+                      +506 8630-4400
+                    </a>
+                  </p>
+                  <p class="mb-0">
+                    <a href="tel:+50687243790" class="text-decoration-none">
+                      +506 8724-3790
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-envelope-fill text-primary fs-4 me-3"></i>
+                <div>
+                  <h4 class="h6 fw-semibold mb-1">Email</h4>
+                  <a href="mailto:Tsirushka@gmail.com" class="text-decoration-none">
+                    Tsirushka@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-start">
+                <i class="bi bi-geo-alt-fill text-primary fs-4 me-3"></i>
+                <div>
+                  <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
+                  <p class="mb-0 text-muted">
+                    Talamanca, Limón<br>
+                    Costa Rica
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="card border-0 shadow-sm bg-success text-white mb-4">
+          <div class="card-body p-4 text-center">
+            <i class="bi bi-whatsapp display-4 mb-3"></i>
+            <h3 class="h5 fw-bold mb-2">¿Prefieres WhatsApp?</h3>
+            <p class="mb-3 opacity-75">
+              Chatea directamente con nosotros
+            </p>
+            <a href="https://wa.me/50686304400?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Tsirushka" 
+               class="btn btn-light btn-lg w-100" 
+               target="_blank">
+              <i class="bi bi-whatsapp me-2"></i>
+              Abrir WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-3">
+              <i class="bi bi-share-fill text-primary me-2"></i>
+              Síguenos
+            </h3>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-primary flex-fill" target="_blank">
+                <i class="bi bi-facebook"></i>
+                <span class="d-none d-md-inline ms-1">Facebook</span>
+              </a>
+              <a href="#" class="btn btn-outline-primary flex-fill" target="_blank">
+                <i class="bi bi-instagram"></i>
+                <span class="d-none d-md-inline ms-1">Instagram</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horarios -->
+        <div class="alert alert-info mt-4">
+          <i class="bi bi-clock-fill me-2"></i>
+          <strong>Horario de atención:</strong><br>
+          Lunes a Viernes: 8:00 AM - 5:00 PM<br>
+          Sábados: 9:00 AM - 1:00 PM
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAQ rápido -->
+    <section class="mt-5 pt-5 border-top">
+      <div class="text-center mb-5">
+        <h2 class="h3 fw-bold">Preguntas frecuentes</h2>
+        <p class="text-muted">Respuestas rápidas a las consultas más comunes</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body">
+              <i class="bi bi-question-circle-fill text-primary fs-3 mb-2"></i>
+              <h3 class="h6 fw-bold mb-2">¿Hacen envíos?</h3>
+              <p class="small text-muted mb-0">
+                Sí, realizamos envíos a todo Costa Rica. El costo se calcula 
+                según tu ubicación.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body">
+              <i class="bi bi-calendar-check-fill text-primary fs-3 mb-2"></i>
+              <h3 class="h6 fw-bold mb-2">¿Cómo reservo un taller?</h3>
+              <p class="small text-muted mb-0">
+                Contáctanos por formulario, WhatsApp o teléfono. Te ayudaremos 
+                a elegir la fecha ideal.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body">
+              <i class="bi bi-credit-card-fill text-primary fs-3 mb-2"></i>
+              <h3 class="h6 fw-bold mb-2">¿Qué métodos de pago aceptan?</h3>
+              <p class="small text-muted mb-0">
+                Aceptamos tarjetas, SINPE Móvil y otros métodos. Te confirmamos 
+                al procesar tu pedido.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body">
+              <i class="bi bi-gift-fill text-primary fs-3 mb-2"></i>
+              <h3 class="h6 fw-bold mb-2">¿Personalizan productos?</h3>
+              <p class="small text-muted mb-0">
+                Sí, creamos chocolates personalizados para eventos. Pedidos desde 
+                20 unidades con 2 semanas de anticipación.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body">
+              <i class="bi bi-truck-front-fill text-primary fs-3 mb-2"></i>
+              <h3 class="h6 fw-bold mb-2">¿Cuánto tarda el envío?</h3>
+              <p class="small text-muted mb-0">
+                Los envíos tardan entre 2-5 días hábiles según la zona de destino 
+                en Costa Rica.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body">
+              <i class="bi bi-people-fill text-primary fs-3 mb-2"></i>
+              <h3 class="h6 fw-bold mb-2">¿Pedidos mayoristas?</h3>
+              <p class="small text-muted mb-0">
+                Ofrecemos precios especiales para pedidos mayoristas. 
+                Contáctanos para una cotización.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- WhatsApp flotante -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/50686304400?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Tsirushka" 
+       class="whatsapp-bubble" 
+       target="_blank">
+      <i class="bi bi-whatsapp"></i>
+      <span class="ms-2 d-none d-sm-inline">Contáctanos</span>
+    </a>
+  </div>
+
+  <div data-component="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./js/theme.js"></script>
+  <script type="module" src="./js/components.js"></script>
+  <script type="module" src="./js/contacto.js"></script>
+  <script type="module">
+    // Pre-llenar asunto desde URL
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const asunto = params.get('asunto');
+      if (asunto) {
+        const select = document.getElementById('asunto');
+        const option = Array.from(select.options).find(opt => 
+          opt.value.toLowerCase() === asunto.toLowerCase()
+        );
+        if (option) {
+          select.value = option.value;
+        } else if (asunto) {
+          select.value = 'Otro';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

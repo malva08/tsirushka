@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-page-title="Inicio">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script type="module" src="./js/head-loader.js"></script>
+</head>
+<body>
+
+  <div data-component="navbar"></div>
+
+  <!-- HERO SECTION -->
+  <header class="hero-main">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <img src="assets/imagen/logo-2.png" alt="Tsirushka" class="hero-logo mb-3">
+      <h1 class="display-4 fw-bold text-white mb-3">Cacao indígena, sabor auténtico</h1>
+      <p class="lead text-white mb-4">
+        Hecho por mujeres Bribri y Cabécar en Talamanca. 
+        Con cada compra apoyas el trabajo justo y la conservación cultural.
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a class="btn btn-primary btn-lg" href="#catalogo">
+          <i class="bi bi-bag-heart"></i> Ver productos
+        </a>
+        <a class="btn btn-outline-light btn-lg" href="#sobre-nosotros">
+          <i class="bi bi-info-circle"></i> Conocer más
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- SOBRE NOSOTROS -->
+    <section id="sobre-nosotros" class="py-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <span class="badge bg-primary mb-2">Nuestra Historia</span>
+          <h2 class="display-6 fw-bold mb-3">Mujeres del Chocolate</h2>
+          <p class="lead text-muted">
+            Tsirushka es una organización con 75 mujeres afiliadas de las comunidades Bribris y Cabécar,
+            en su mayoría jefas de hogar además de productoras de cacao, banano y plátano.
+          </p>
+          <p class="text-muted">
+            Un pueblo cuyos principios de vida se basan en el respeto, la tolerancia,
+            la igualdad de género y de oportunidades. Cada producto que adquieres
+            contribuye directamente al empoderamiento de estas familias.
+          </p>
+          <a href="about.html" class="btn btn-outline-primary">
+            Leer más <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <img src="assets/imagen/imagen -Bienvenida.jpg" 
+               alt="Mujeres de Tsirushka" 
+               class="img-fluid rounded-4 shadow-lg">
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section id="catalogo" class="py-5">
+      <div class="text-center mb-5">
+        <span class="badge bg-primary mb-2">Nuestros Chocolates</span>
+        <h2 class="display-6 fw-bold mb-3">Productos Artesanales</h2>
+        <p class="lead text-muted">Del campo a tu hogar: Disfruta la pureza de nuestro cacao</p>
+      </div>
+
+      <!-- Buscador -->
+      <form id="formBuscador" class="row g-2 align-items-center mb-4 justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="input-group input-group-lg">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input id="q" class="form-control" placeholder="Buscar chocolates, cacao, regalos…">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Grid de productos con skeleton -->
+      <div id="grid" class="row g-4">
+        <!-- Skeleton inicial -->
+        <template id="skel">
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card h-100">
+              <div class="skeleton skel-img"></div>
+              <div class="card-body">
+                <div class="skeleton skel-text" style="width:70%"></div>
+                <div class="skeleton skel-text" style="width:40%"></div>
+                <div class="skeleton skel-text" style="width:50%; height:34px"></div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <nav class="mt-4">
+        <ul class="pagination justify-content-center" id="paginacion"></ul>
+      </nav>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="py-5 bg-light rounded-4 my-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="badge bg-primary mb-2">Experiencias</span>
+          <h2 class="display-6 fw-bold mb-3">Nuestros Servicios</h2>
+        </div>
+        
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <div class="mb-3">
+                  <i class="bi bi-basket2-fill text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2">Venta de productos</h3>
+                <p class="text-muted mb-3">
+                  Del campo a tu hogar: Disfruta la pureza de nuestros productos de cacao.
+                </p>
+                <a href="catalogo.html" class="btn btn-outline-primary btn-sm">
+                  Ver catálogo <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <div class="mb-3">
+                  <i class="bi bi-mortarboard-fill text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2">Talleres artesanales</h3>
+                <p class="text-muted mb-3">
+                  Aprende a crear tu propio chocolate artesanal guiado por expertas.
+                </p>
+                <a href="servicios.html#talleres" class="btn btn-outline-primary btn-sm">
+                  Más información <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <div class="mb-3">
+                  <i class="bi bi-geo-alt-fill text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2">Visitas a la finca</h3>
+                <p class="text-muted mb-3">
+                  Un viaje a la esencia del chocolate. Conoce el proceso desde el origen.
+                </p>
+                <a href="servicios.html#visitas" class="btn btn-outline-primary btn-sm">
+                  Reservar tour <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <div class="mb-3">
+                  <i class="bi bi-truck text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2">Envíos a domicilio</h3>
+                <p class="text-muted mb-3">
+                  El sabor de la finca, directo a tu casa. Envíos a todo el país.
+                </p>
+                <a href="servicios.html#envios" class="btn btn-outline-primary btn-sm">
+                  Consultar envío <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <div class="mb-3">
+                  <i class="bi bi-gift-fill text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h3 class="h5 fw-bold mb-2">Eventos especiales</h3>
+                <p class="text-muted mb-3">
+                  Personaliza chocolates para bodas, cumpleaños y eventos corporativos.
+                </p>
+                <a href="servicios.html#eventos" class="btn btn-outline-primary btn-sm">
+                  Cotizar <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm bg-primary text-white">
+              <div class="card-body text-center p-4 d-flex flex-column justify-content-center">
+                <h3 class="h5 fw-bold mb-2">¿Tienes dudas?</h3>
+                <p class="mb-3">
+                  Contáctanos y con gusto te atenderemos.
+                </p>
+                <a href="contacto.html" class="btn btn-light btn-sm">
+                  <i class="bi bi-chat-dots"></i> Contactar
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA DE PRODUCTOS -->
+    <section class="py-5">
+      <div class="text-center mb-4">
+        <h2 class="display-6 fw-bold">Nuestros Deliciosos Productos</h2>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="position-relative overflow-hidden rounded-4 gallery-item">
+            <img src="assets/imagen/tulo.jpg" alt="Chocolate" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
+            <div class="gallery-overlay">
+              <h5 class="text-white fw-bold">Chocolate Artesanal</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative overflow-hidden rounded-4 gallery-item">
+            <img src="assets/imagen/Galleta.jpg" alt="Galletas" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
+            <div class="gallery-overlay">
+              <h5 class="text-white fw-bold">Galletas de Cacao</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative overflow-hidden rounded-4 gallery-item">
+            <img src="assets/imagen/chocolate-blanco.jpg" alt="Manteca" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
+            <div class="gallery-overlay">
+              <h5 class="text-white fw-bold">Manteca de Cacao</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="py-5 my-5 text-center bg-primary text-white rounded-4">
+      <div class="container py-4">
+        <h2 class="display-6 fw-bold mb-3">Apoya el trabajo de las mujeres de Talamanca</h2>
+        <p class="lead mb-4">Cada compra hace la diferencia</p>
+        <a href="#catalogo" class="btn btn-light btn-lg">
+          <i class="bi bi-bag-heart"></i> Comprar ahora
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- WhatsApp flotante -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/50686304400?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Tsirushka" 
+       class="whatsapp-bubble" 
+       target="_blank"
+       title="Contáctanos por WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+      <span class="ms-2 d-none d-sm-inline">Contáctanos</span>
+    </a>
+  </div>
+
+  <div data-component="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./js/theme.js"></script>
+  <script type="module" src="./js/components.js"></script>
+  <script type="module" src="./js/catalogo.js"></script>
+</body>
+</html>

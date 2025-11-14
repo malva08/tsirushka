@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-page-title="Dashboard Admin">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script type="module" src="./js/head-loader.js"></script>
+    <link rel="stylesheet" href="./assets/admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img
+          src="assets/imagen/logo-2.png"
+          alt="Tsirushka"
+          class="sidebar-logo"
+        />
+        <h2 class="sidebar-title">Admin Panel</h2>
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="nav-item active">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="admin-categorias.html" class="nav-item">
+          <i class="bi bi-tags"></i>
+          <span>Categorías</span>
+        </a>
+        <a href="admin-productos.html" class="nav-item">
+          <i class="bi bi-box-seam"></i>
+          <span>Productos</span>
+        </a>
+        <a href="admin-clientes.html" class="nav-item">
+          <i class="bi bi-people"></i>
+          <span>Clientes</span>
+        </a>
+        <a href="admin-pedidos.html" class="nav-item">
+          <i class="bi bi-cart-check"></i>
+          <span>Pedidos</span>
+        </a>
+        <a href="admin-solicitudes.html" class="nav-item">
+          <i class="bi bi-chat-left-text"></i>
+          <span>Solicitudes</span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="index.html" class="nav-item" target="_blank">
+          <i class="bi bi-globe"></i>
+          <span>Ver Tienda</span>
+        </a>
+        <a href="#" class="nav-item" id="adminLogout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Cerrar Sesión</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-user-info">
+          <i class="bi bi-person-circle fs-3"></i>
+          <div class="user-details">
+            <p class="user-name mb-0" id="adminUserName">Admin</p>
+            <small class="text-muted" id="adminUserEmail"
+              >admin@tsirushka.com</small
+            >
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <!-- HEADER -->
+      <header class="admin-header">
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggleBtn">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1 class="admin-page-title">Dashboard</h1>
+        <div class="header-actions">
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <main class="admin-content">
+        <!-- STATS CARDS -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card stat-card-primary">
+              <div class="stat-icon">
+                <i class="bi bi-box-seam"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="statProductos">...</h3>
+                <p class="stat-label">Productos Activos</p>
+                <small class="stat-change text-muted">
+                  <i class="bi bi-info-circle"></i> En catálogo
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card stat-card-warning">
+              <div class="stat-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="statBajoStock">...</h3>
+                <p class="stat-label">Productos Bajo Stock</p>
+                <small class="stat-change text-warning">
+                  <i class="bi bi-arrow-down"></i> Requiere atención
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card stat-card-info">
+              <div class="stat-icon">
+                <i class="bi bi-cart-check"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="statPedidos">-</h3>
+                <p class="stat-label">Pedidos Totales</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card stat-card-success">
+              <div class="stat-icon">
+                <i class="bi bi-cash-stack"></i>
+              </div>
+              <div class="stat-content">
+                <h3 class="stat-value" id="statVentas">-</h3>
+                <p class="stat-label">Ventas del Mes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCESOS RÁPIDOS -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-8">
+            <div class="card">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <h2 class="h5 mb-0">Pedidos Recientes</h2>
+                <a
+                  href="admin-pedidos.html"
+                  class="btn btn-sm btn-outline-primary"
+                >
+                  Ver todos
+                </a>
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Pedido #</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="recentOrders">
+                      <tr>
+                        <td colspan="6" class="text-center py-4">
+                          <div
+                            class="spinner-border spinner-border-sm text-primary"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Cargando...</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card mb-3">
+              <div class="card-header">
+                <h2 class="h5 mb-0">Acciones Rápidas</h2>
+              </div>
+              <div class="card-body">
+                <div class="d-grid gap-2">
+                  <a
+                    href="admin-productos.html?action=new"
+                    class="btn btn-primary"
+                  >
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Nuevo Producto
+                  </a>
+                  <a
+                    href="admin-pedidos.html?filter=pending"
+                    class="btn btn-outline-warning"
+                  >
+                    <i class="bi bi-hourglass-split me-2"></i>
+                    Ver Pendientes
+                  </a>
+                  <a
+                    href="admin-solicitudes.html?filter=unread"
+                    class="btn btn-outline-info"
+                  >
+                    <i class="bi bi-envelope me-2"></i>
+                    Mensajes Sin Leer
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2 class="h5 mb-0">Productos con Bajo Stock</h2>
+              </div>
+              <div class="card-body">
+                <div id="lowStockProducts" class="list-group list-group-flush">
+                  <div class="text-center py-3">
+                    <div
+                      class="spinner-border spinner-border-sm text-primary"
+                      role="status"
+                    >
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GRÁFICO Y ACTIVIDAD -->
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="h5 mb-0">Ventas Mensuales</h2>
+              </div>
+              <div class="card-body">
+                <canvas id="salesChart" height="80"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script type="module" src="./js/admin-dashboard.js"></script>
+  </body>
+</html>

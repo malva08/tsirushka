@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-page-title="Solicitudes Admin">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script type="module" src="./js/head-loader.js"></script>
+  <link rel="stylesheet" href="./assets/admin.css" />
+</head>
+<body class="admin-body">
+  
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <img src="assets/imagen/logo-2.png" alt="Tsirushka" class="sidebar-logo" />
+      <h2 class="sidebar-title">Admin Panel</h2>
+      <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="admin-dashboard.html" class="nav-item">
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+      </a>
+            <a href="admin-categorias.html" class="nav-item" target="_blank">
+        <i class="bi bi-tags"></i>
+        <span>Categorías</span>
+      </a>
+      <a href="admin-productos.html" class="nav-item">
+        <i class="bi bi-box-seam"></i>
+        <span>Productos</span>
+      </a>
+
+      <a href="admin-pedidos.html" class="nav-item">
+        <i class="bi bi-cart-check"></i>
+        <span>Pedidos</span>
+      </a>
+      <a href="admin-solicitudes.html" class="nav-item active">
+        <i class="bi bi-chat-left-text"></i>
+        <span>Solicitudes</span>
+      </a>
+      <a href="admin-clientes.html" class="nav-item">
+        <i class="bi bi-people"></i>
+        <span>Clientes</span>
+      </a>
+
+      <div class="sidebar-divider"></div>
+
+      <a href="index.html" class="nav-item">
+        <i class="bi bi-globe"></i>
+        <span>Ver Tienda</span>
+      </a>
+      <a href="#" class="nav-item" id="adminLogout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main">
+    
+    <!-- HEADER -->
+    <header class="admin-header">
+      <button class="sidebar-toggle d-lg-none" id="sidebarToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+      <h1 class="admin-page-title">Gestión de Solicitudes</h1>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="admin-content">
+      
+      <!-- ESTADÍSTICAS -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Total</p>
+                  <h3 class="mb-0" id="statTotal">-</h3>
+                </div>
+                <i class="bi bi-inbox fs-1 text-primary opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Pendientes</p>
+                  <h3 class="mb-0" id="statPendientes">-</h3>
+                </div>
+                <i class="bi bi-exclamation-circle fs-1 text-warning opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Leídas</p>
+                  <h3 class="mb-0" id="statLeidas">-</h3>
+                </div>
+                <i class="bi bi-eye fs-1 text-info opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Resueltas</p>
+                  <h3 class="mb-0" id="statResueltas">-</h3>
+                </div>
+                <i class="bi bi-check-circle fs-1 text-success opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <form id="formFiltros" class="row g-3 align-items-end">
+            <div class="col-md-6">
+              <label class="form-label">Buscar</label>
+              <input type="text" id="searchQuery" class="form-control" placeholder="Nombre, email o asunto...">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Estado</label>
+              <select id="filterEstado" class="form-select">
+                <option value="">Todas</option>
+                <option value="PENDIENTE">Pendientes</option>
+                <option value="LEIDA">Leídas</option>
+                <option value="RESUELTA">Resueltas</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search"></i> Buscar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- TABLA DE SOLICITUDES -->
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Solicitante</th>
+                  <th>Asunto</th>
+                  <th>Estado</th>
+                  <th style="width: 200px">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="solicitudesTable">
+                <tr>
+                  <td colspan="5" class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <nav>
+            <ul class="pagination justify-content-center mb-0" id="paginacion"></ul>
+          </nav>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL VER DETALLE -->
+  <div class="modal fade" id="modalDetalle" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalle de Solicitud</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Nombre</label>
+              <p id="detNombre" class="mb-0">-</p>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Email</label>
+              <p id="detEmail" class="mb-0">-</p>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Teléfono</label>
+              <p id="detTelefono" class="mb-0">-</p>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Estado</label>
+              <p id="detEstado" class="mb-0">-</p>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">Asunto</label>
+              <p id="detAsunto" class="mb-0">-</p>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">Mensaje</label>
+              <p id="detMensaje" class="mb-0" style="white-space: pre-wrap;">-</p>
+            </div>
+            <div class="col-12" id="detAdjuntoContainer" style="display: none;">
+              <label class="form-label fw-semibold">Adjunto</label>
+              <p><a id="detAdjunto" href="#" target="_blank">Ver archivo adjunto</a></p>
+            </div>
+            <div class="col-12">
+              <hr>
+              <label class="form-label fw-semibold">Notas Internas</label>
+              <textarea id="detNotas" class="form-control" rows="3" placeholder="Agregar notas privadas sobre esta solicitud..."></textarea>
+              <button id="btnGuardarNotas" class="btn btn-sm btn-primary mt-2">
+                <i class="bi bi-save"></i> Guardar Notas
+              </button>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold text-muted small">Recibida</label>
+              <p id="detFecha" class="mb-0 text-muted small">-</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group me-auto" role="group">
+            <button id="btnMarcarPendiente" class="btn btn-outline-warning btn-sm">
+              <i class="bi bi-exclamation-circle"></i> Pendiente
+            </button>
+            <button id="btnMarcarLeida" class="btn btn-outline-info btn-sm">
+              <i class="bi bi-eye"></i> Leída
+            </button>
+            <button id="btnMarcarResuelta" class="btn btn-outline-success btn-sm">
+              <i class="bi bi-check-circle"></i> Resuelta
+            </button>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ELIMINAR -->
+  <div class="modal fade" id="modalEliminar" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Confirmar Eliminación</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar esta solicitud?</p>
+          <p class="fw-bold mb-0" id="deleteSolicitudAsunto"></p>
+          <p class="text-muted small">Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDelete">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./js/admin-solicitudes.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-page-title="Productos Admin">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script type="module" src="./js/head-loader.js"></script>
+    <link rel="stylesheet" href="./assets/admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img
+          src="assets/imagen/logo-2.png"
+          alt="Tsirushka"
+          class="sidebar-logo"
+        />
+        <h2 class="sidebar-title">Admin Panel</h2>
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="nav-item">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+              <a href="admin-categorias.html" class="nav-item">
+        <i class="bi bi-tags"></i>
+        <span>Categorías</span>
+      </a>
+        <a href="admin-productos.html" class="nav-item active">
+          <i class="bi bi-box-seam"></i>
+          <span>Productos</span>
+        </a>
+        <a href="admin-pedidos.html" class="nav-item">
+          <i class="bi bi-cart-check"></i>
+          <span>Pedidos</span>
+        </a>
+        <a href="admin-solicitudes.html" class="nav-item">
+          <i class="bi bi-chat-left-text"></i>
+          <span>Solicitudes</span>
+        </a>
+        <a href="admin-usuarios.html" class="nav-item">
+          <i class="bi bi-people"></i>
+          <span>Usuarios</span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="index.html" class="nav-item" target="_blank">
+          <i class="bi bi-globe"></i>
+          <span>Ver Tienda</span>
+        </a>
+        <a href="#" class="nav-item" id="adminLogout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Cerrar Sesión</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <!-- HEADER -->
+      <header class="admin-header">
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggleBtn">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1 class="admin-page-title">Gestión de Productos</h1>
+        <div class="header-actions">
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#modalProducto"
+          >
+            <i class="bi bi-plus-circle"></i> Nuevo Producto
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <main class="admin-content">
+        <!-- FILTROS -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <form id="formFiltros" class="row g-3 align-items-end">
+              <div class="col-md-4">
+                <label class="form-label">Buscar</label>
+                <input
+                  type="text"
+                  id="searchQuery"
+                  class="form-control"
+                  placeholder="Nombre del producto..."
+                />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Categoría</label>
+                <select id="filterCategoria" class="form-select">
+                  <option value="">Todas</option>
+                  <option value="CHOCOLATE">Chocolate</option>
+                  <option value="GALLETA">Galletas</option>
+                  <option value="MANTECA">Manteca</option>
+                  <option value="CACAO">Cacao</option>
+                  <option value="OTRO">Otro</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Estado</label>
+                <select id="filterEstado" class="form-select">
+                  <option value="">Todos</option>
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                  <option value="bajo-stock">Bajo Stock</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-search"></i> Buscar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- TABLA DE PRODUCTOS -->
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th style="width: 60px">Imagen</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Estado</th>
+                    <th style="width: 150px">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="productosTable">
+                  <!-- Skeleton loader -->
+                  <tr>
+                    <td colspan="7" class="text-center py-5">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <nav>
+              <ul
+                class="pagination justify-content-center mb-0"
+                id="paginacion"
+              ></ul>
+            </nav>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL PRODUCTO -->
+    <div class="modal fade" id="modalProducto" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalProductoTitle">Nuevo Producto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <form id="formProducto">
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Nombre del Producto *</label>
+                  <input
+                    type="text"
+                    id="prodNombre"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Categoría *</label>
+                  <select id="prodCategoria" class="form-select" required>
+                    <option value="">Seleccionar...</option>
+                    <!-- Las categorías se cargarán dinámicamente -->
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Precio (₡) *</label>
+                  <input
+                    type="number"
+                    id="prodPrecio"
+                    class="form-control"
+                    min="0"
+                    step="100"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Stock Disponible *</label>
+                  <input
+                    type="number"
+                    id="prodStock"
+                    class="form-control"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Stock Mínimo</label>
+                  <input
+                    type="number"
+                    id="prodStockMin"
+                    class="form-control"
+                    min="0"
+                    value="5"
+                  />
+                  <small class="text-muted"
+                    >Alerta cuando esté por debajo</small
+                  >
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Descripción</label>
+                  <textarea
+                    id="prodDescripcion"
+                    class="form-control"
+                    rows="3"
+                  ></textarea>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">URL de Imagen Principal</label>
+                  <input
+                    type="url"
+                    id="prodImagen"
+                    class="form-control"
+                    placeholder="https://..."
+                  />
+                  <small class="text-muted"
+                    >Deja vacío para usar imagen por defecto</small
+                  >
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="prodActivo"
+                      checked
+                    />
+                    <label class="form-check-label" for="prodActivo">
+                      Producto activo (visible en tienda)
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Guardar Producto
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CONFIRMAR ELIMINACIÓN -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Confirmar Eliminación</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <!-- Actualizar el modal de eliminación para ser más claro -->
+          <div class="modal-body">
+            <p class="text-danger fw-bold">
+              ⚠️ Esta acción es PERMANENTE e IRREVERSIBLE
+            </p>
+            <p>
+              ¿Estás seguro de que deseas eliminar este producto de la base de
+              datos?
+            </p>
+            <p class="fw-bold mb-0" id="deleteProductName"></p>
+            <div class="alert alert-warning mt-3 mb-0">
+              <small>
+                💡 <strong>Sugerencia:</strong> Si solo quieres ocultar el
+                producto temporalmente, usa el botón
+                <i class="bi bi-eye-slash"></i> <strong>Inactivar</strong> en
+                lugar de eliminarlo.
+              </small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmDelete">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/admin-productos.js"></script>
+  </body>
+</html>

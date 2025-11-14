@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-page-title="Categorías Admin">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script type="module" src="./js/head-loader.js"></script>
+    <link rel="stylesheet" href="./assets/admin.css" />
+  </head>
+  <body class="admin-body">
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img
+          src="assets/imagen/logo-2.png"
+          alt="Tsirushka"
+          class="sidebar-logo"
+        />
+        <h2 class="sidebar-title">Admin Panel</h2>
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="nav-item">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="admin-categorias.html" class="nav-item active">
+          <i class="bi bi-tags"></i>
+          <span>Categorías</span>
+        </a>
+        <a href="admin-productos.html" class="nav-item">
+          <i class="bi bi-box-seam"></i>
+          <span>Productos</span>
+        </a>
+        <a href="admin-pedidos.html" class="nav-item">
+          <i class="bi bi-cart-check"></i>
+          <span>Pedidos</span>
+        </a>
+        <a href="admin-solicitudes.html" class="nav-item">
+          <i class="bi bi-chat-left-text"></i>
+          <span>Solicitudes</span>
+        </a>
+        <a href="admin-usuarios.html" class="nav-item">
+          <i class="bi bi-people"></i>
+          <span>Usuarios</span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="index.html" class="nav-item" target="_blank">
+          <i class="bi bi-globe"></i>
+          <span>Ver Tienda</span>
+        </a>
+        <a href="#" class="nav-item" id="adminLogout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Cerrar Sesión</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <!-- HEADER -->
+      <header class="admin-header">
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggleBtn">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1 class="admin-page-title">Gestión de Categorías</h1>
+        <div class="header-actions">
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCategoria"
+          >
+            <i class="bi bi-plus-circle"></i> Nueva Categoría
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <main class="admin-content">
+        <!-- ESTADÍSTICAS -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <p class="text-muted mb-1">Total Categorías</p>
+                    <h3 class="mb-0" id="statTotal">-</h3>
+                  </div>
+                  <i class="bi bi-tags fs-1 text-primary opacity-25"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLA DE CATEGORÍAS -->
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Slug</th>
+                    <th>Descripción</th>
+                    <th>Productos</th>
+                    <th style="width: 150px">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="categoriasTable">
+                  <tr>
+                    <td colspan="5" class="text-center py-5">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL CATEGORÍA -->
+    <div class="modal fade" id="modalCategoria" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCategoriaTitle">
+              Nueva Categoría
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <form id="formCategoria">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Nombre *</label>
+                <input
+                  type="text"
+                  id="catNombre"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <textarea
+                  id="catDescripcion"
+                  class="form-control"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL ELIMINAR -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Confirmar Eliminación</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar esta categoría?</p>
+            <p class="fw-bold mb-0" id="deleteCategoriaName"></p>
+            <p class="text-muted small mt-2">
+              Los productos asociados quedarán sin categoría.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmDelete">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/admin-categorias.js"></script>
+  </body>
+</html>

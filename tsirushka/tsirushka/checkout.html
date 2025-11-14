@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-page-title="Checkout">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script type="module" src="./js/head-loader.js"></script>
+  </head>
+  <body>
+    <div data-component="navbar"></div>
+
+    <main class="container py-4">
+      <h1 class="h4 mb-4">Finalizar compra</h1>
+      <div class="row g-4">
+        <!-- Datos de envío -->
+        <div class="col-lg-8">
+          <form id="formCheckout" class="row g-3">
+            <h2 class="h5">Datos de contacto y entrega</h2>
+            <div class="col-md-6">
+              <label class="form-label">Nombre completo</label>
+              <input id="fullName" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input id="email" type="email" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Teléfono</label>
+              <input
+                id="phone"
+                class="form-control"
+                placeholder="+506 8888-8888"
+              />
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">Modo de entrega</label>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="shippingMode"
+                  id="shipHome"
+                  value="ENVIO"
+                  checked
+                />
+                <label class="form-check-label" for="shipHome">
+                  <i class="bi bi-truck"></i> Envío a domicilio
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="shippingMode"
+                  id="pickup"
+                  value="RETIRO"
+                />
+                <label class="form-check-label" for="pickup">
+                  <i class="bi bi-shop"></i> Retiro en tienda
+                </label>
+              </div>
+            </div>
+
+            <div id="shippingFields" class="col-12">
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label">Provincia</label>
+                  <select id="province" class="form-select" required>
+                    <option value="">Seleccionar...</option>
+                    <option value="San José">San José</option>
+                    <option value="Alajuela">Alajuela</option>
+                    <option value="Cartago">Cartago</option>
+                    <option value="Heredia">Heredia</option>
+                    <option value="Guanacaste">Guanacaste</option>
+                    <option value="Puntarenas">Puntarenas</option>
+                    <option value="Limón">Limón</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Cantón</label>
+                  <input id="canton" class="form-control" required />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Distrito</label>
+                  <input id="district" class="form-control" required />
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Dirección exacta</label>
+                  <textarea
+                    id="address"
+                    class="form-control"
+                    rows="3"
+                    required
+                    placeholder="Ej: De la iglesia católica, 200 metros norte..."
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label"
+                    >Indicaciones adicionales (opcional)</label
+                  >
+                  <input
+                    id="notes"
+                    class="form-control"
+                    placeholder="Ej: Casa de dos pisos, portón azul"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-3" />
+
+            <!-- Pago -->
+            <h2 class="h5">Método de pago</h2>
+            <div class="col-12">
+              <div class="form-check mb-2">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="payMethod"
+                  id="paySinpe"
+                  value="SINPE"
+                  checked
+                />
+                <label class="form-check-label" for="paySinpe">
+                  <i class="bi bi-phone"></i> SINPE Móvil
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="payMethod"
+                  id="payCard"
+                  value="TARJETA"
+                />
+                <label class="form-check-label" for="payCard">
+                  <i class="bi bi-credit-card"></i> Tarjeta (validación manual)
+                </label>
+              </div>
+            </div>
+
+            <!-- Campos SINPE -->
+            <div id="sinpeFields" class="col-12">
+              <div class="alert alert-info small mb-3">
+                <i class="bi bi-info-circle"></i>
+                <strong>Instrucciones SINPE Móvil:</strong>
+                <ol class="mb-0 mt-2 ps-3">
+                  <li>
+                    Transferí el monto total al número
+                    <strong id="sinpeNumberLabel">+506 8630-4400</strong>
+                  </li>
+                  <li>Usá como referencia tu nombre o número de pedido</li>
+                  <li>Completá los datos a continuación</li>
+                </ol>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Teléfono desde el que pagás</label>
+                  <input
+                    id="sinpePhone"
+                    class="form-control"
+                    inputmode="numeric"
+                    maxlength="20"
+                    placeholder="+506 8888-8888"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"
+                    >Referencia (si ya hiciste la transferencia)</label
+                  >
+                  <input
+                    id="sinpeRef"
+                    class="form-control"
+                    placeholder="Número de referencia SINPE"
+                  />
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Notas adicionales (opcional)</label>
+                  <input
+                    id="sinpeNotes"
+                    class="form-control"
+                    placeholder="Ej: Transferí hace 10 minutos"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Campos tarjeta (manual, sin capturar PAN completo) -->
+            <!-- Campos tarjeta (SIMULACIÓN - no se procesa pago real) -->
+            <div id="cardFields" class="col-12" style="display: none">
+              <div class="alert alert-info small mb-3">
+                <i class="bi bi-info-circle"></i>
+                <strong>Modo de prueba:</strong> Este es un formulario de
+                simulación. No se procesarán pagos reales. Nuestro equipo
+                validará manualmente el pago y te contactará para confirmar.
+              </div>
+
+              <div class="card mb-3" style="max-width: 400px">
+                <div class="card-body">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                  >
+                    <div class="text-muted small">
+                      TARJETA DE DÉBITO/CRÉDITO
+                    </div>
+                    <div id="cardBrandIcon">
+                      <i class="bi bi-credit-card fs-4"></i>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label small">Número de tarjeta</label>
+                    <input
+                      id="cardNumber"
+                      class="form-control form-control-lg"
+                      inputmode="numeric"
+                      maxlength="19"
+                      placeholder="1234 5678 9012 3456"
+                      autocomplete="off"
+                    />
+                    <small class="text-muted"
+                      >Simulación - usar tarjeta de prueba</small
+                    >
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label small">Nombre del titular</label>
+                    <input
+                      id="cardName"
+                      class="form-control"
+                      maxlength="80"
+                      placeholder="JUAN PEREZ"
+                      style="text-transform: uppercase"
+                    />
+                  </div>
+
+                  <div class="row g-2">
+                    <div class="col-6">
+                      <label class="form-label small"
+                        >Fecha de expiración</label
+                      >
+                      <input
+                        id="cardExpiry"
+                        class="form-control"
+                        inputmode="numeric"
+                        maxlength="5"
+                        placeholder="MM/AA"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label small">CVV</label>
+                      <input
+                        id="cardCvv"
+                        class="form-control"
+                        inputmode="numeric"
+                        maxlength="4"
+                        placeholder="123"
+                        type="password"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="alert alert-warning small">
+                <strong>💳 Tarjetas de prueba:</strong>
+                <ul class="mb-0 mt-1 small">
+                  <li><strong>Visa:</strong> 4532 1488 0343 6467</li>
+                  <li><strong>Mastercard:</strong> 5425 2334 3010 9903</li>
+                  <li><strong>Amex:</strong> 3782 822463 10005</li>
+                  <li>
+                    CVV: cualquier 3-4 dígitos | Fecha: cualquier fecha futura
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Notas adicionales (opcional)</label>
+                <input
+                  id="cardNotes"
+                  class="form-control"
+                  placeholder="Ej: Llamar después de las 2pm para confirmar"
+                />
+              </div>
+            </div>
+
+            <div class="col-12 d-grid d-md-flex gap-2 mt-4">
+              <a href="cart.html" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver al carrito
+              </a>
+              <button
+                type="submit"
+                id="btnPlace"
+                class="btn btn-primary btn-lg ms-auto"
+              >
+                <i class="bi bi-check2-circle"></i> Confirmar pedido
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Resumen -->
+        <div class="col-lg-4">
+          <div class="card sticky-top" style="top: 20px">
+            <div class="card-header">
+              <h2 class="h5 mb-0">Resumen del pedido</h2>
+            </div>
+            <div class="card-body">
+              <div id="cartSummary" class="mb-3">
+                <div class="text-center py-3">
+                  <div
+                    class="spinner-border spinner-border-sm text-primary"
+                  ></div>
+                  <small class="d-block mt-2 text-muted">Cargando...</small>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal</span><strong id="sumSubtotal">₡0</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Envío</span><strong id="sumShipping">₡0</strong>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-between fs-5">
+                <span><strong>Total</strong></span>
+                <strong class="text-primary" id="sumTotal">₡0</strong>
+              </div>
+              <small class="text-muted d-block mt-2">
+                <i class="bi bi-shield-check"></i> Pago seguro. El total final
+                se valida en el servidor.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/components.js"></script>
+    <script type="module" src="./js/checkout.js"></script>
+  </body>
+</html>

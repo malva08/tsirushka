@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-page-title="Clientes Admin">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script type="module" src="./js/head-loader.js"></script>
+  <link rel="stylesheet" href="./assets/admin.css" />
+</head>
+<body class="admin-body">
+  
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <img src="assets/imagen/logo-2.png" alt="Tsirushka" class="sidebar-logo" />
+      <h2 class="sidebar-title">Admin Panel</h2>
+      <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="admin-dashboard.html" class="nav-item">
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+      </a>
+            <a href="admin-categorias.html" class="nav-item">
+        <i class="bi bi-tags"></i>
+        <span>Categorías</span>
+      </a>
+      <a href="admin-productos.html" class="nav-item">
+        <i class="bi bi-box-seam"></i>
+        <span>Productos</span>
+      </a>
+
+      <a href="admin-pedidos.html" class="nav-item">
+        <i class="bi bi-cart-check"></i>
+        <span>Pedidos</span>
+      </a>
+      <a href="admin-solicitudes.html" class="nav-item">
+        <i class="bi bi-chat-left-text"></i>
+        <span>Solicitudes</span>
+      </a>
+      <a href="admin-clientes.html" class="nav-item active">
+        <i class="bi bi-people"></i>
+        <span>Clientes</span>
+      </a>
+
+      <div class="sidebar-divider"></div>
+
+      <a href="index.html" class="nav-item" target="_blank">
+        <i class="bi bi-globe"></i>
+        <span>Ver Tienda</span>
+      </a>
+      <a href="#" class="nav-item" id="adminLogout">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main">
+    
+    <!-- HEADER -->
+    <header class="admin-header">
+      <button class="sidebar-toggle d-lg-none" id="sidebarToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+      <h1 class="admin-page-title">Gestión de Clientes</h1>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="admin-content">
+      
+      <!-- ESTADÍSTICAS -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Total Clientes</p>
+                  <h3 class="mb-0" id="statTotal">-</h3>
+                </div>
+                <i class="bi bi-people fs-1 text-primary opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Activos</p>
+                  <h3 class="mb-0" id="statActivos">-</h3>
+                </div>
+                <i class="bi bi-check-circle fs-1 text-success opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Bloqueados</p>
+                  <h3 class="mb-0" id="statBloqueados">-</h3>
+                </div>
+                <i class="bi bi-x-circle fs-1 text-danger opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="text-muted mb-1">Email Verificado</p>
+                  <h3 class="mb-0" id="statVerificados">-</h3>
+                </div>
+                <i class="bi bi-envelope-check fs-1 text-info opacity-25"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <form id="formFiltros" class="row g-3 align-items-end">
+            <div class="col-md-6">
+              <label class="form-label">Buscar</label>
+              <input type="text" id="searchQuery" class="form-control" placeholder="Nombre o email...">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Estado</label>
+              <select id="filterEstado" class="form-select">
+                <option value="">Todos</option>
+                <option value="ACTIVO">Activo</option>
+                <option value="INACTIVO">Bloqueado</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search"></i> Buscar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- TABLA DE CLIENTES -->
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Pedidos</th>
+                  <th>Estado</th>
+                  <th style="width: 200px">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="clientesTable">
+                <tr>
+                  <td colspan="6" class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <nav>
+            <ul class="pagination justify-content-center mb-0" id="paginacion"></ul>
+          </nav>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL EDITAR CLIENTE -->
+  <div class="modal fade" id="modalCliente" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="formCliente">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Nombre Completo *</label>
+              <input type="text" id="clienteNombre" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Teléfono</label>
+              <input type="tel" id="clienteTelefono" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" id="clienteEmail" class="form-control" disabled />
+              <small class="text-muted">El email no se puede modificar</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-save"></i> Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL VER PEDIDOS -->
+  <div class="modal fade" id="modalPedidos" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Pedidos del Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="pedidosContent">
+            <p class="text-center text-muted">Cargando pedidos...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="./js/admin-clientes.js"></script>
+</body>
+</html>
